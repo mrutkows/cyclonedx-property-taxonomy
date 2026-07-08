@@ -499,55 +499,55 @@ Rows marked have no built-in enum equivalent and MUST use the URN-style form.
 The `cdx:ai-ml:model:performance` namespace corresponds to the `performanceMetric.type` definition in the JSON schema. Each value may be expressed in **two equivalent forms**:
 
 - **Short form** — the plain string from the schema's built-in enum (e.g., `bleu`).
-- **URN-style form** — the fully qualified path (e.g., `cdx:ai-ml:model:performance:metric:bleu`). MUST be used for values not in the built-in enum. Either form MAY be used for built-in values; the short form is preferred for brevity.
+- **URN-style form** — the fully qualified path (e.g., `cdx:ai-ml:model:metric:performance:bleu`). MUST be used for values not in the built-in enum. Either form MAY be used for built-in values; the short form is preferred for brevity.
 
 Rows marked have no built-in enum equivalent and MUST use the URN-style form.
 
 | Short form | URN-style form | Description |
 | ---------- | -------------- | ----------- |
-| `mmlu-pro` | `cdx:ai-ml:model:performance:metric:mmlu-pro` | Massive Multitask Language Understanding Pro — expert-level academic and professional reasoning across multiple disciplines. |
-| `gpqa` | `cdx:ai-ml:model:performance:metric:gpqa` | Graduate-Level Google-Proof Q&A — highly difficult dataset for PhD-level reasoning and scientific problem-solving. |
-| `math-500` | `cdx:ai-ml:model:performance:metric:math-500` | A subset of the MATH benchmark used to evaluate complex, multi-step mathematical reasoning. |
-| `humaneval` | `cdx:ai-ml:model:performance:metric:humaneval` | Industry-standard benchmark for evaluating Python code generation and functional programming synthesis. |
-| `swe-bench` | `cdx:ai-ml:model:performance:metric:swe-bench` | Software Engineering Benchmark — evaluates agentic ability to resolve real-world software engineering issues. |
-| `ifeval` | `cdx:ai-ml:model:performance:metric:ifeval` | Instruction Following Evaluation — tests strict adherence to verifiable formatting constraints. |
-| `livebench` | `cdx:ai-ml:model:performance:metric:livebench` | Frequently updated, contamination-free benchmark for reasoning, math, and coding. |
-| `webarena` | `cdx:ai-ml:model:performance:metric:webarena` | Agentic benchmark for complex multi-step tasks using a web browser, APIs, and OS environments. |
-| `lmsys-elo` | `cdx:ai-ml:model:performance:metric:lmsys-elo` | Crowd-sourced human preference rating derived from blind A/B battle tests in the LMSYS Chatbot Arena. |
-| `strongreject` | `cdx:ai-ml:model:performance:metric:strongreject` | Standardized metric for measuring safety alignment against harmful prompts while avoiding false positives. |
-| `perplexity` | `cdx:ai-ml:model:performance:metric:perplexity` | Fundamental language model metric measuring how well a probability model predicts a sample. |
-| `bleu` | `cdx:ai-ml:model:performance:metric:bleu` | Bilingual Evaluation Understudy — metric for evaluating machine translation quality. |
-| `rouge` | `cdx:ai-ml:model:performance:metric:rouge` | Recall-Oriented Understudy for Gisting Evaluation — metrics for automatic summarization and translation. |
-| `latency` | `cdx:ai-ml:model:performance:metric:latency` | Time delay between input submission and output generation, typically measured in milliseconds or seconds. |
-| `throughput` | `cdx:ai-ml:model:performance:metric:throughput` | Rate at which a model processes requests or tokens, typically measured in tokens per second or requests per second. |
-| `coco` | `cdx:ai-ml:model:performance:metric:coco` | Common Objects in Context — benchmark for object detection, segmentation, and captioning in computer vision. |
-| `vqa` | `cdx:ai-ml:model:performance:metric:vqa` | Visual Question Answering — evaluates a model's ability to answer questions about images. |
-| `imagenet` | `cdx:ai-ml:model:performance:metric:imagenet` | Large visual database benchmark for image classification and object recognition. |
-| `arc` | `cdx:ai-ml:model:performance:metric:arc` | AI2 Reasoning Challenge — multiple-choice science question benchmark measuring commonsense and factual reasoning. |
-| `hellaswag` | `cdx:ai-ml:model:performance:metric:hellaswag` | Commonsense NLI benchmark for sentence completion requiring real-world situational reasoning. |
-| `truthfulqa` | `cdx:ai-ml:model:performance:metric:truthfulqa` | Benchmark measuring a model's propensity to produce truthful answers versus plausible-sounding falsehoods. |
-| `winogrande` | `cdx:ai-ml:model:performance:metric:winogrande` | Large-scale Winograd schema challenge testing commonsense reasoning via pronoun disambiguation. |
-| `gsm8k` | `cdx:ai-ml:model:performance:metric:gsm8k` | Grade-school math benchmark measuring multi-step arithmetic reasoning. |
-| `mbpp` | `cdx:ai-ml:model:performance:metric:mbpp` | Mostly Basic Python Programming benchmark for code generation via programming problems. |
-| `bigbench-hard` | `cdx:ai-ml:model:performance:metric:bigbench-hard` | A subset of BIG-Bench tasks specifically selected for being difficult for current language models. |
-| `mmlu` | `cdx:ai-ml:model:performance:metric:mmlu` | Massive Multitask Language Understanding — the original 57-subject academic reasoning benchmark. |
-| `mme` | `cdx:ai-ml:model:performance:metric:mme` | Multimodal LLM Evaluation benchmark measuring perception and cognition across image-text pairs. |
-| `seedbench` | `cdx:ai-ml:model:performance:metric:seedbench` | SEED-Bench — multimodal benchmark with 19K multiple-choice questions covering spatial and temporal understanding. |
-| `mtbench` | `cdx:ai-ml:model:performance:metric:mtbench` | MT-Bench — multi-turn conversational benchmark graded by a strong LLM judge. |
-| `agentic-success-rate` | `cdx:ai-ml:model:performance:metric:agentic-success-rate` | Task-completion rate for autonomous agents evaluated on environment-grounded multi-step benchmarks. |
-| `ttft` | `cdx:ai-ml:model:performance:metric:ttft` | Time-to-First-Token — latency from request submission to generation of the first output token. |
-| `memory-footprint` | `cdx:ai-ml:model:performance:metric:memory-footprint` | Peak GPU/CPU memory consumption during inference. |
-| `f1` `cdx:ai-ml:model:performance:metric:f1` | Harmonic mean of precision and recall; standard metric for classification and span-extraction tasks. |
-| `exact-match` | `cdx:ai-ml:model:performance:metric:exact-match` | Strict string equality between prediction and reference; standard for extractive QA and code generation. |
-| `map` | `cdx:ai-ml:model:performance:metric:map` | Mean Average Precision — area-under-precision-recall curve averaged over classes (detection/retrieval). |
-| `ndcg` | `cdx:ai-ml:model:performance:metric:ndcg` | Normalised Discounted Cumulative Gain — ranking quality metric used in information retrieval. |
-| `wer` | `cdx:ai-ml:model:performance:metric:wer` | Word Error Rate — proportion of incorrectly predicted words; standard metric for ASR systems. |
-| `cer` | `cdx:ai-ml:model:performance:metric:cer` | Character Error Rate — character-level analogue of WER; used for OCR and low-resource ASR. |
-| `fid` | `cdx:ai-ml:model:performance:metric:fid` | Fréchet Inception Distance — distribution-level similarity metric for generative image quality. |
-| `clip-score` | `cdx:ai-ml:model:performance:metric:clip-score` | Cosine similarity between CLIP embeddings of generated images and conditioning text. |
-| `power-consumption` | `cdx:ai-ml:model:performance:metric:power-consumption` | Average power draw (watts) during a standardised inference workload. |
-| `carbon-intensity` | `cdx:ai-ml:model:performance:metric:carbon-intensity` | gCO₂eq per inference request under a standardised workload and grid carbon intensity. |
-| _(none)_ | `cdx:ai-ml:model:performance:metric:_undefined:<NAME>` | `<NAME>` placeholder, used to provide an arbitrary performance metric name. |
+| `mmlu-pro` | `cdx:ai-ml:model:metric:performance:mmlu-pro` | Massive Multitask Language Understanding Pro — expert-level academic and professional reasoning across multiple disciplines. |
+| `gpqa` | `cdx:ai-ml:model:metric:performance:gpqa` | Graduate-Level Google-Proof Q&A — highly difficult dataset for PhD-level reasoning and scientific problem-solving. |
+| `math-500` | `cdx:ai-ml:model:metric:performance:math-500` | A subset of the MATH benchmark used to evaluate complex, multi-step mathematical reasoning. |
+| `humaneval` | `cdx:ai-ml:model:metric:performance:humaneval` | Industry-standard benchmark for evaluating Python code generation and functional programming synthesis. |
+| `swe-bench` | `cdx:ai-ml:model:metric:performance:swe-bench` | Software Engineering Benchmark — evaluates agentic ability to resolve real-world software engineering issues. |
+| `ifeval` | `cdx:ai-ml:model:metric:performance:ifeval` | Instruction Following Evaluation — tests strict adherence to verifiable formatting constraints. |
+| `livebench` | `cdx:ai-ml:model:metric:performance:livebench` | Frequently updated, contamination-free benchmark for reasoning, math, and coding. |
+| `webarena` | `cdx:ai-ml:model:metric:performance:webarena` | Agentic benchmark for complex multi-step tasks using a web browser, APIs, and OS environments. |
+| `lmsys-elo` | `cdx:ai-ml:model:metric:performance:lmsys-elo` | Crowd-sourced human preference rating derived from blind A/B battle tests in the LMSYS Chatbot Arena. |
+| `strongreject` | `cdx:ai-ml:model:metric:performance:strongreject` | Standardized metric for measuring safety alignment against harmful prompts while avoiding false positives. |
+| `perplexity` | `cdx:ai-ml:model:metric:performance:perplexity` | Fundamental language model metric measuring how well a probability model predicts a sample. |
+| `bleu` | `cdx:ai-ml:model:metric:performance:bleu` | Bilingual Evaluation Understudy — metric for evaluating machine translation quality. |
+| `rouge` | `cdx:ai-ml:model:metric:performance:rouge` | Recall-Oriented Understudy for Gisting Evaluation — metrics for automatic summarization and translation. |
+| `latency` | `cdx:ai-ml:model:metric:performance:latency` | Time delay between input submission and output generation, typically measured in milliseconds or seconds. |
+| `throughput` | `cdx:ai-ml:model:metric:performance:throughput` | Rate at which a model processes requests or tokens, typically measured in tokens per second or requests per second. |
+| `coco` | `cdx:ai-ml:model:metric:performance:coco` | Common Objects in Context — benchmark for object detection, segmentation, and captioning in computer vision. |
+| `vqa` | `cdx:ai-ml:model:metric:performance:vqa` | Visual Question Answering — evaluates a model's ability to answer questions about images. |
+| `imagenet` | `cdx:ai-ml:model:metric:performance:imagenet` | Large visual database benchmark for image classification and object recognition. |
+| `arc` | `cdx:ai-ml:model:metric:performance:arc` | AI2 Reasoning Challenge — multiple-choice science question benchmark measuring commonsense and factual reasoning. |
+| `hellaswag` | `cdx:ai-ml:model:metric:performance:hellaswag` | Commonsense NLI benchmark for sentence completion requiring real-world situational reasoning. |
+| `truthfulqa` | `cdx:ai-ml:model:metric:performance:truthfulqa` | Benchmark measuring a model's propensity to produce truthful answers versus plausible-sounding falsehoods. |
+| `winogrande` | `cdx:ai-ml:model:metric:performance:winogrande` | Large-scale Winograd schema challenge testing commonsense reasoning via pronoun disambiguation. |
+| `gsm8k` | `cdx:ai-ml:model:metric:performance:gsm8k` | Grade-school math benchmark measuring multi-step arithmetic reasoning. |
+| `mbpp` | `cdx:ai-ml:model:metric:performance:mbpp` | Mostly Basic Python Programming benchmark for code generation via programming problems. |
+| `bigbench-hard` | `cdx:ai-ml:model:metric:performance:bigbench-hard` | A subset of BIG-Bench tasks specifically selected for being difficult for current language models. |
+| `mmlu` | `cdx:ai-ml:model:metric:performance:mmlu` | Massive Multitask Language Understanding — the original 57-subject academic reasoning benchmark. |
+| `mme` | `cdx:ai-ml:model:metric:performance:mme` | Multimodal LLM Evaluation benchmark measuring perception and cognition across image-text pairs. |
+| `seedbench` | `cdx:ai-ml:model:metric:performance:seedbench` | SEED-Bench — multimodal benchmark with 19K multiple-choice questions covering spatial and temporal understanding. |
+| `mtbench` | `cdx:ai-ml:model:metric:performance:mtbench` | MT-Bench — multi-turn conversational benchmark graded by a strong LLM judge. |
+| `agentic-success-rate` | `cdx:ai-ml:model:metric:performance:agentic-success-rate` | Task-completion rate for autonomous agents evaluated on environment-grounded multi-step benchmarks. |
+| `ttft` | `cdx:ai-ml:model:metric:performance:ttft` | Time-to-First-Token — latency from request submission to generation of the first output token. |
+| `memory-footprint` | `cdx:ai-ml:model:metric:performance:memory-footprint` | Peak GPU/CPU memory consumption during inference. |
+| `f1` `cdx:ai-ml:model:metric:performance:f1` | Harmonic mean of precision and recall; standard metric for classification and span-extraction tasks. |
+| `exact-match` | `cdx:ai-ml:model:metric:performance:exact-match` | Strict string equality between prediction and reference; standard for extractive QA and code generation. |
+| `map` | `cdx:ai-ml:model:metric:performance:map` | Mean Average Precision — area-under-precision-recall curve averaged over classes (detection/retrieval). |
+| `ndcg` | `cdx:ai-ml:model:metric:performance:ndcg` | Normalised Discounted Cumulative Gain — ranking quality metric used in information retrieval. |
+| `wer` | `cdx:ai-ml:model:metric:performance:wer` | Word Error Rate — proportion of incorrectly predicted words; standard metric for ASR systems. |
+| `cer` | `cdx:ai-ml:model:metric:performance:cer` | Character Error Rate — character-level analogue of WER; used for OCR and low-resource ASR. |
+| `fid` | `cdx:ai-ml:model:metric:performance:fid` | Fréchet Inception Distance — distribution-level similarity metric for generative image quality. |
+| `clip-score` | `cdx:ai-ml:model:metric:performance:clip-score` | Cosine similarity between CLIP embeddings of generated images and conditioning text. |
+| `power-consumption` | `cdx:ai-ml:model:metric:performance:power-consumption` | Average power draw (watts) during a standardised inference workload. |
+| `carbon-intensity` | `cdx:ai-ml:model:metric:performance:carbon-intensity` | gCO₂eq per inference request under a standardised workload and grid carbon intensity. |
+| _(none)_ | `cdx:ai-ml:model:metric:performance:_undefined:<NAME>` | `<NAME>` placeholder, used to provide an arbitrary performance metric name. |
 
 #### Example: Referencing an extended performance metric
 
@@ -560,7 +560,7 @@ Rows marked have no built-in enum equivalent and MUST use the URN-style form.
       "quantitativeAnalysis": {
         "performanceMetrics": [
           {
-            "type": "cdx:ai-ml:model:performance:metric:wer",
+            "type": "cdx:ai-ml:model:metric:performance:wer",
             "measure": { "value": 4.2, "unit": "%" }
           },
           {
