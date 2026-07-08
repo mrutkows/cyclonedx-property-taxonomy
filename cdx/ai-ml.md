@@ -18,10 +18,6 @@ _Boolean value_ are `true` or `false`; case sensitive.
 
 ---
 
-> **📌 Proposed additions (2.0-dev-ai-ml):** This document extends the original `ai-ml.md` with new namespace sections that correspond to extensible `^cdx:ai-ml:` pattern fields in the CycloneDX v2.0 AI/ML JSON Schema. Sections and values marked **[PROPOSED]** are candidates for formal registration in the property taxonomy and for use as `cdx:ai-ml:` URN-style values inside the schema's `anyOf` enum+pattern fields.
-
----
-
 ## `cdx:ai-ml:model` Namespace Taxonomy
 
 | Namespace | Description |
@@ -30,9 +26,9 @@ _Boolean value_ are `true` or `false`; case sensitive.
 | `cdx:ai-ml:model:template` | Mark a model as a template and describe its details. |
 | `cdx:ai-ml:model:parameter` | Describe learned parameters of a model which dictated by the model's architecture and design before training. |
 | `cdx:ai-ml:model:hyperparameter` | Describe parameters used to configure a model. |
-| `cdx:ai-ml:model:architecture` | **[PROPOSED]** Describe the structural and behavioral architecture of the model. Maps directly to the `modelArchitecture.structural` object in the JSON schema. |
-| `cdx:ai-ml:model:task` | **[PROPOSED]** Describe the ML task the model is designed to perform. Maps to the `modelTaskType` definition in the JSON schema. |
-| `cdx:ai-ml:model:performance` | **[PROPOSED]** Describe performance metrics associated with the model. Maps to the `performanceMetric.type` definition in the JSON schema. |
+| `cdx:ai-ml:model:architecture` | Describe the structural and behavioral architecture of the model. Maps directly to the `modelArchitecture.structural` object in the JSON schema. |
+| `cdx:ai-ml:model:task` | Describe the ML task the model is designed to perform. Maps to the `modelTaskType` definition in the JSON schema. |
+| `cdx:ai-ml:model:performance` | Describe performance metrics associated with the model. Maps to the `performanceMetric.type` definition in the JSON schema. |
 
 ### `cdx:ai-ml:model:modality` Namespace Taxonomy
 
@@ -296,7 +292,7 @@ The following pseudocode shows how to include a model hyperparameter that is not
 
 ---
 
-## **[PROPOSED]** `cdx:ai-ml:model:architecture` Namespace Taxonomy
+## `cdx:ai-ml:model:architecture` Namespace Taxonomy
 
 The `cdx:ai-ml:model:architecture` namespace corresponds to the `modelArchitecture.structural` object in the CycloneDX v2.0 AI/ML JSON Schema (`cyclonedx-ai-ml-2.0.schema.json`).
 
@@ -313,7 +309,7 @@ Each field that has a `^cdx:ai-ml:[a-z0-9:-]+$` pattern extension accepts values
 
 ### `cdx:ai-ml:model:architecture:primary` Values
 
-Maps to `structural.primary` in the schema. The **Short form** column is the built-in schema enum value; the **URN-style form** column is the equivalent fully-qualified property taxonomy value. Rows marked **[PROPOSED]** have no built-in enum equivalent and MUST use the URN-style form.
+Maps to `structural.primary` in the schema. The **Short form** column is the built-in schema enum value; the **URN-style form** column is the equivalent fully-qualified property taxonomy value. Rows marked have no built-in enum equivalent and MUST use the URN-style form.
 
 | Short form | URN-style form | Description |
 | ---------- | -------------- | ----------- |
@@ -331,16 +327,17 @@ Maps to `structural.primary` in the schema. The **Short form** column is the bui
 | `rwkv` | `cdx:ai-ml:model:architecture:primary:rwkv` | Receptive Weighted Key Value — architecture combining parallelizable training with RNN-like inference. |
 | `snn` | `cdx:ai-ml:model:architecture:primary:snn` | Spiking Neural Network — neuromorphic architecture utilizing discrete, time-dependent spiking activations. |
 | `kan` | `cdx:ai-ml:model:architecture:primary:kan` | Kolmogorov-Arnold Network — architecture featuring learnable activation functions on edges rather than nodes. |
-| _(none)_ **[PROPOSED]** | `cdx:ai-ml:model:architecture:primary:diffusion` | Denoising diffusion probabilistic model — iteratively refines noise into data (e.g., DDPM, Stable Diffusion). |
-| _(none)_ **[PROPOSED]** | `cdx:ai-ml:model:architecture:primary:flow-matching` | Continuous normalizing flow trained via flow matching / rectified flow (e.g., Flux, SD3). |
-| _(none)_ **[PROPOSED]** | `cdx:ai-ml:model:architecture:primary:rbm` | Restricted Boltzmann Machine — energy-based generative model with stochastic hidden units. |
-| _(none)_ **[PROPOSED]** | `cdx:ai-ml:model:architecture:primary:capsnet` | Capsule Network — architecture using dynamic routing between capsule groups to preserve spatial hierarchies. |
-| _(none)_ **[PROPOSED]** | `cdx:ai-ml:model:architecture:primary:neuromorphic` | Architecture designed for deployment on neuromorphic hardware (e.g., Intel Loihi, IBM TrueNorth). |
-| _(none)_ **[PROPOSED]** | `cdx:ai-ml:model:architecture:primary:hybrid` | Explicit first-class combination of two or more distinct primary architectures (e.g., CNN+Transformer). |
+| `diffusion` | `cdx:ai-ml:model:architecture:primary:diffusion` | Denoising diffusion probabilistic model — iteratively refines noise into data (e.g., DDPM, Stable Diffusion). |
+| `flow-matching` | `cdx:ai-ml:model:architecture:primary:flow-matching` | Continuous normalizing flow trained via flow matching / rectified flow (e.g., Flux, SD3). |
+| `rbm` | `cdx:ai-ml:model:architecture:primary:rbm` | Restricted Boltzmann Machine — energy-based generative model with stochastic hidden units. |
+| `capsnet` | `cdx:ai-ml:model:architecture:primary:capsnet` | Capsule Network — architecture using dynamic routing between capsule groups to preserve spatial hierarchies. |
+| `neuromorphic` | `cdx:ai-ml:model:architecture:primary:neuromorphic` | Architecture designed for deployment on neuromorphic hardware (e.g., Intel Loihi, IBM TrueNorth). |
+| `hybrid` | `cdx:ai-ml:model:architecture:primary:hybrid` | Explicit first-class combination of two or more distinct primary architectures (e.g., CNN+Transformer). |
+| _(none)_ | `cdx:ai-ml:model:architecture:primary:_undefined:<NAME>` | `<NAME>` placeholder, used to provide an arbitrary primary architecture name. |
 
 ### `cdx:ai-ml:model:architecture:secondary` Values
 
-Maps to items in `structural.secondary` in the schema. Rows marked **[PROPOSED]** have no built-in enum equivalent and MUST use the URN-style form.
+Maps to items in `structural.secondary` in the schema. Rows marked have no built-in enum equivalent and MUST use the URN-style form.
 
 | Short form | URN-style form | Description |
 | ---------- | -------------- | ----------- |
@@ -361,18 +358,19 @@ Maps to items in `structural.secondary` in the schema. Rows marked **[PROPOSED]*
 | `adapter-layers` | `cdx:ai-ml:model:architecture:secondary:adapter-layers` | Parameter-efficient fine-tuning layers inserted into frozen models (e.g., LoRA, adapters). |
 | `projector-layers` | `cdx:ai-ml:model:architecture:secondary:projector-layers` | Cross-modal projection components bridging different modalities (e.g., Q-Former, linear projectors). |
 | `gated-linear-units` | `cdx:ai-ml:model:architecture:secondary:gated-linear-units` | Gated activation mechanisms using element-wise multiplication (e.g., GLU, SwiGLU, GeGLU). |
-| _(none)_ **[PROPOSED]** | `cdx:ai-ml:model:architecture:secondary:speculative-decoding` | Sub-network pairing a small draft model with a large verifier model to accelerate autoregressive generation. |
-| _(none)_ **[PROPOSED]** | `cdx:ai-ml:model:architecture:secondary:rotary-position-embedding` | Rotary Position Embedding (RoPE) sub-component encoding positional information via rotation matrices. |
-| _(none)_ **[PROPOSED]** | `cdx:ai-ml:model:architecture:secondary:grouped-query-attention` | Grouped-Query Attention (GQA) variant sharing key/value heads across groups of query heads to reduce KV-cache size. |
-| _(none)_ **[PROPOSED]** | `cdx:ai-ml:model:architecture:secondary:sliding-window-attention` | Attention mechanism restricting receptive field to a local sliding window (e.g., Mistral). |
-| _(none)_ **[PROPOSED]** | `cdx:ai-ml:model:architecture:secondary:retrieval-augmented` | Explicit retrieval sub-network prepended to or integrated into the model (e.g., RAG, RETRO). |
-| _(none)_ **[PROPOSED]** | `cdx:ai-ml:model:architecture:secondary:memory-augmented` | External or persistent memory bank integrated into the forward pass (e.g., MemGPT, Memorizing Transformers). |
-| _(none)_ **[PROPOSED]** | `cdx:ai-ml:model:architecture:secondary:multimodal-fusion` | Layer or block that fuses representations across more than one modality (e.g., cross-modal attention, FiLM conditioning). |
-| _(none)_ **[PROPOSED]** | `cdx:ai-ml:model:architecture:secondary:reranker` | Separate scoring / reranking head applied after an initial retrieval or generation step. |
+| `speculative-decoding` | `cdx:ai-ml:model:architecture:secondary:speculative-decoding` | Sub-network pairing a small draft model with a large verifier model to accelerate autoregressive generation. |
+| `rotary-position-embedding` | `cdx:ai-ml:model:architecture:secondary:rotary-position-embedding` | Rotary Position Embedding (RoPE) sub-component encoding positional information via rotation matrices. |
+| `grouped-query-attention` | `cdx:ai-ml:model:architecture:secondary:grouped-query-attention` | Grouped-Query Attention (GQA) variant sharing key/value heads across groups of query heads to reduce KV-cache size. |
+| `sliding-window-attention` | `cdx:ai-ml:model:architecture:secondary:sliding-window-attention` | Attention mechanism restricting receptive field to a local sliding window (e.g., Mistral). |
+| `retrieval-augmented` | `cdx:ai-ml:model:architecture:secondary:retrieval-augmented` | Explicit retrieval sub-network prepended to or integrated into the model (e.g., RAG, RETRO). |
+| `memory-augmented` | `cdx:ai-ml:model:architecture:secondary:memory-augmented` | External or persistent memory bank integrated into the forward pass (e.g., MemGPT, Memorizing Transformers). |
+| `multimodal-fusion` | `cdx:ai-ml:model:architecture:secondary:multimodal-fusion` | Layer or block that fuses representations across more than one modality (e.g., cross-modal attention, FiLM conditioning). |
+| `reranker` | `cdx:ai-ml:model:architecture:secondary:reranker` | Separate scoring / reranking head applied after an initial retrieval or generation step. |
+| _(none)_ | `cdx:ai-ml:model:architecture:secondary:_undefined:<NAME>` | `<NAME>` placeholder, used to provide an arbitrary secondary architecture name. |
 
 ### `cdx:ai-ml:model:architecture:topology` Values
 
-Maps to `structural.topologyType` in the schema. Rows marked **[PROPOSED]** have no built-in enum equivalent and MUST use the URN-style form.
+Maps to `structural.topologyType` in the schema. Rows marked have no built-in enum equivalent and MUST use the URN-style form.
 
 | Short form | URN-style form | Description |
 | ---------- | -------------- | ----------- |
@@ -380,9 +378,10 @@ Maps to `structural.topologyType` in the schema. Rows marked **[PROPOSED]** have
 | `sparse` | `cdx:ai-ml:model:architecture:topology:sparse` | Only a subset of parameters are active during inference with selective connectivity. |
 | `dynamic` | `cdx:ai-ml:model:architecture:topology:dynamic` | Parameter activation and connectivity patterns change based on input or runtime conditions. |
 | `liquid` | `cdx:ai-ml:model:architecture:topology:liquid` | Continuously adaptive network structure with time-varying connections and activations. |
-| _(none)_ **[PROPOSED]** | `cdx:ai-ml:model:architecture:topology:mixture-of-depths` | Tokens are routed to different computational depths rather than different expert modules. |
-| _(none)_ **[PROPOSED]** | `cdx:ai-ml:model:architecture:topology:early-exit` | Inference exits at the earliest layer that meets a confidence threshold, reducing compute for easy inputs. |
-| _(none)_ **[PROPOSED]** | `cdx:ai-ml:model:architecture:topology:recurrent-hybrid` | Static layer layout that alternates between global attention and recurrent / SSM layers (e.g., Jamba, Zamba). |
+| `mixture-of-depths` | `cdx:ai-ml:model:architecture:topology:mixture-of-depths` | Tokens are routed to different computational depths rather than different expert modules. |
+| `early-exit` | `cdx:ai-ml:model:architecture:topology:early-exit` | Inference exits at the earliest layer that meets a confidence threshold, reducing compute for easy inputs. |
+| `recurrent-hybrid` | `cdx:ai-ml:model:architecture:topology:recurrent-hybrid` | Static layer layout that alternates between global attention and recurrent / SSM layers (e.g., Jamba, Zamba). |
+| _(none)_ | `cdx:ai-ml:model:architecture:topology:_undefined:<NAME>` | `<NAME>` placeholder, used to provide an arbitrary topology type name. |
 
 #### Example: Using built-in and URN-style values together
 
@@ -409,14 +408,14 @@ Maps to `structural.topologyType` in the schema. Rows marked **[PROPOSED]** have
 
 ---
 
-### **[PROPOSED]** `cdx:ai-ml:model:task` Namespace Taxonomy
+### `cdx:ai-ml:model:task` Namespace Taxonomy
 
 The `cdx:ai-ml:model:task` namespace corresponds to the `modelTaskType` definition in the JSON schema. Each value may be expressed in **two equivalent forms**:
 
 - **Short form** — the plain string from the schema's built-in enum (e.g., `text-generation`).
 - **URN-style form** — the fully qualified path (e.g., `cdx:ai-ml:model:task:text-generation`). MUST be used for values not in the built-in enum. Either form MAY be used for built-in values; the short form is preferred for brevity.
 
-Rows marked **[PROPOSED]** have no built-in enum equivalent and MUST use the URN-style form.
+Rows marked have no built-in enum equivalent and MUST use the URN-style form.
 
 | Short form | URN-style form | Description |
 | ---------- | -------------- | ----------- |
@@ -454,24 +453,24 @@ Rows marked **[PROPOSED]** have no built-in enum equivalent and MUST use the URN
 | `embedding` | `cdx:ai-ml:model:task:embedding` | Generate dense vector representations of data. |
 | `zero-shot-classification` | `cdx:ai-ml:model:task:zero-shot-classification` | Classify data without task-specific training examples. |
 | `few-shot-learning` | `cdx:ai-ml:model:task:few-shot-learning` | Learn from very few examples per class. |
-| `other` | `cdx:ai-ml:model:task:other` | Other machine learning tasks not covered by predefined categories. |
-| _(none)_ **[PROPOSED]** | `cdx:ai-ml:model:task:reasoning` | Explicit chain-of-thought or multi-step logical reasoning (e.g., o1, DeepSeek-R1). |
-| _(none)_ **[PROPOSED]** | `cdx:ai-ml:model:task:code-review` | Automated review, critique, and improvement of existing source code. |
-| _(none)_ **[PROPOSED]** | `cdx:ai-ml:model:task:code-completion` | Context-aware in-editor code completion (e.g., Copilot fill-in-the-middle). |
-| _(none)_ **[PROPOSED]** | `cdx:ai-ml:model:task:document-parsing` | Extraction of structured data from documents including PDFs, invoices, and forms. |
-| _(none)_ **[PROPOSED]** | `cdx:ai-ml:model:task:image-to-3d` | Generation of 3D representations (NeRF, mesh, point cloud) from one or more 2D images. |
-| _(none)_ **[PROPOSED]** | `cdx:ai-ml:model:task:text-to-3d` | Generation of 3D assets from text descriptions. |
-| _(none)_ **[PROPOSED]** | `cdx:ai-ml:model:task:multimodal-generation` | Simultaneous generation of content across more than one modality from a single prompt. |
-| _(none)_ **[PROPOSED]** | `cdx:ai-ml:model:task:agentic-planning` | High-level task decomposition and multi-step planning for autonomous agents. |
-| _(none)_ **[PROPOSED]** | `cdx:ai-ml:model:task:tool-use` | Structured invocation of external tools, APIs, or function calls from model output. |
-| _(none)_ **[PROPOSED]** | `cdx:ai-ml:model:task:anomaly-detection` | Identification of outliers or deviations from expected distributions in structured or unstructured data. |
-| _(none)_ **[PROPOSED]** | `cdx:ai-ml:model:task:pose-estimation` | Detection and estimation of body keypoints or object pose from images or video. |
-| _(none)_ **[PROPOSED]** | `cdx:ai-ml:model:task:optical-flow` | Per-pixel motion estimation between consecutive video frames. |
-| _(none)_ **[PROPOSED]** | `cdx:ai-ml:model:task:super-resolution` | Up-sampling of low-resolution images or video to higher resolution. |
-| _(none)_ **[PROPOSED]** | `cdx:ai-ml:model:task:inpainting` | Reconstruction of missing or masked regions within an image or video. |
-| _(none)_ **[PROPOSED]** | `cdx:ai-ml:model:task:molecule-generation` | De novo design and generation of molecular structures for drug discovery or materials science. |
-| _(none)_ **[PROPOSED]** | `cdx:ai-ml:model:task:protein-structure-prediction` | Prediction of three-dimensional protein folding from amino acid sequences. |
-| _(none)_ **[PROPOSED]** | `cdx:ai-ml:model:task:weather-forecasting` | Prediction of atmospheric conditions from observational or reanalysis data. |
+| `reasoning` `cdx:ai-ml:model:task:reasoning` | Explicit chain-of-thought or multi-step logical reasoning (e.g., o1, DeepSeek-R1). |
+| `code-review` | `cdx:ai-ml:model:task:code-review` | Automated review, critique, and improvement of existing source code. |
+| `code-completion` `cdx:ai-ml:model:task:code-completion` | Context-aware in-editor code completion (e.g., Copilot fill-in-the-middle). |
+| `document-parsing` | `cdx:ai-ml:model:task:document-parsing` | Extraction of structured data from documents including PDFs, invoices, and forms. |
+| `image-to-3d` | `cdx:ai-ml:model:task:image-to-3d` | Generation of 3D representations (NeRF, mesh, point cloud) from one or more 2D images. |
+| `text-to-3d` | `cdx:ai-ml:model:task:text-to-3d` | Generation of 3D assets from text descriptions. |
+| `multimodal-generation` | `cdx:ai-ml:model:task:multimodal-generation` | Simultaneous generation of content across more than one modality from a single prompt. |
+| `agentic-planning` | `cdx:ai-ml:model:task:agentic-planning` | High-level task decomposition and multi-step planning for autonomous agents. |
+| `tool-use` | `cdx:ai-ml:model:task:tool-use` | Structured invocation of external tools, APIs, or function calls from model output. |
+| `anomaly-detection` |  `cdx:ai-ml:model:task:anomaly-detection` | Identification of outliers or deviations from expected distributions in structured or unstructured data. |
+| `pose-estimation` | `cdx:ai-ml:model:task:pose-estimation` | Detection and estimation of body keypoints or object pose from images or video. |
+| `optical-flow` | `cdx:ai-ml:model:task:optical-flow` | Per-pixel motion estimation between consecutive video frames. |
+| `super-resolution` | `cdx:ai-ml:model:task:super-resolution` | Up-sampling of low-resolution images or video to higher resolution. |
+| `inpainting` | `cdx:ai-ml:model:task:inpainting` | Reconstruction of missing or masked regions within an image or video. |
+| `molecule-generation` | `cdx:ai-ml:model:task:molecule-generation` | De novo design and generation of molecular structures for drug discovery or materials science. |
+| `protein-structure-prediction` | `cdx:ai-ml:model:task:protein-structure-prediction` | Prediction of three-dimensional protein folding from amino acid sequences. |
+| `weather-forecasting` | `cdx:ai-ml:model:task:weather-forecasting` | Prediction of atmospheric conditions from observational or reanalysis data. |
+| _(none)_ | `cdx:ai-ml:model:task:_undefined:<NAME>` | `<NAME>` placeholder, used to provide an arbitrary model task type name. |
 
 #### Example: Referencing an extended task type
 
@@ -495,14 +494,14 @@ Rows marked **[PROPOSED]** have no built-in enum equivalent and MUST use the URN
 
 ---
 
-### **[PROPOSED]** `cdx:ai-ml:model:performance` Namespace Taxonomy
+### `cdx:ai-ml:model:performance` Namespace Taxonomy
 
 The `cdx:ai-ml:model:performance` namespace corresponds to the `performanceMetric.type` definition in the JSON schema. Each value may be expressed in **two equivalent forms**:
 
 - **Short form** — the plain string from the schema's built-in enum (e.g., `bleu`).
 - **URN-style form** — the fully qualified path (e.g., `cdx:ai-ml:model:performance:metric:bleu`). MUST be used for values not in the built-in enum. Either form MAY be used for built-in values; the short form is preferred for brevity.
 
-Rows marked **[PROPOSED]** have no built-in enum equivalent and MUST use the URN-style form.
+Rows marked have no built-in enum equivalent and MUST use the URN-style form.
 
 | Short form | URN-style form | Description |
 | ---------- | -------------- | ----------- |
@@ -524,30 +523,31 @@ Rows marked **[PROPOSED]** have no built-in enum equivalent and MUST use the URN
 | `coco` | `cdx:ai-ml:model:performance:metric:coco` | Common Objects in Context — benchmark for object detection, segmentation, and captioning in computer vision. |
 | `vqa` | `cdx:ai-ml:model:performance:metric:vqa` | Visual Question Answering — evaluates a model's ability to answer questions about images. |
 | `imagenet` | `cdx:ai-ml:model:performance:metric:imagenet` | Large visual database benchmark for image classification and object recognition. |
-| _(none)_ **[PROPOSED]** | `cdx:ai-ml:model:performance:metric:arc` | AI2 Reasoning Challenge — multiple-choice science question benchmark measuring commonsense and factual reasoning. |
-| _(none)_ **[PROPOSED]** | `cdx:ai-ml:model:performance:metric:hellaswag` | Commonsense NLI benchmark for sentence completion requiring real-world situational reasoning. |
-| _(none)_ **[PROPOSED]** | `cdx:ai-ml:model:performance:metric:truthfulqa` | Benchmark measuring a model's propensity to produce truthful answers versus plausible-sounding falsehoods. |
-| _(none)_ **[PROPOSED]** | `cdx:ai-ml:model:performance:metric:winogrande` | Large-scale Winograd schema challenge testing commonsense reasoning via pronoun disambiguation. |
-| _(none)_ **[PROPOSED]** | `cdx:ai-ml:model:performance:metric:gsm8k` | Grade-school math benchmark measuring multi-step arithmetic reasoning. |
-| _(none)_ **[PROPOSED]** | `cdx:ai-ml:model:performance:metric:mbpp` | Mostly Basic Python Programming benchmark for code generation via programming problems. |
-| _(none)_ **[PROPOSED]** | `cdx:ai-ml:model:performance:metric:bigbench-hard` | A subset of BIG-Bench tasks specifically selected for being difficult for current language models. |
-| _(none)_ **[PROPOSED]** | `cdx:ai-ml:model:performance:metric:mmlu` | Massive Multitask Language Understanding — the original 57-subject academic reasoning benchmark. |
-| _(none)_ **[PROPOSED]** | `cdx:ai-ml:model:performance:metric:mme` | Multimodal LLM Evaluation benchmark measuring perception and cognition across image-text pairs. |
-| _(none)_ **[PROPOSED]** | `cdx:ai-ml:model:performance:metric:seedbench` | SEED-Bench — multimodal benchmark with 19K multiple-choice questions covering spatial and temporal understanding. |
-| _(none)_ **[PROPOSED]** | `cdx:ai-ml:model:performance:metric:mtbench` | MT-Bench — multi-turn conversational benchmark graded by a strong LLM judge. |
-| _(none)_ **[PROPOSED]** | `cdx:ai-ml:model:performance:metric:agentic-success-rate` | Task-completion rate for autonomous agents evaluated on environment-grounded multi-step benchmarks. |
-| _(none)_ **[PROPOSED]** | `cdx:ai-ml:model:performance:metric:ttft` | Time-to-First-Token — latency from request submission to generation of the first output token. |
-| _(none)_ **[PROPOSED]** | `cdx:ai-ml:model:performance:metric:memory-footprint` | Peak GPU/CPU memory consumption during inference. |
-| _(none)_ **[PROPOSED]** | `cdx:ai-ml:model:performance:metric:f1` | Harmonic mean of precision and recall; standard metric for classification and span-extraction tasks. |
-| _(none)_ **[PROPOSED]** | `cdx:ai-ml:model:performance:metric:exact-match` | Strict string equality between prediction and reference; standard for extractive QA and code generation. |
-| _(none)_ **[PROPOSED]** | `cdx:ai-ml:model:performance:metric:map` | Mean Average Precision — area-under-precision-recall curve averaged over classes (detection/retrieval). |
-| _(none)_ **[PROPOSED]** | `cdx:ai-ml:model:performance:metric:ndcg` | Normalised Discounted Cumulative Gain — ranking quality metric used in information retrieval. |
-| _(none)_ **[PROPOSED]** | `cdx:ai-ml:model:performance:metric:wer` | Word Error Rate — proportion of incorrectly predicted words; standard metric for ASR systems. |
-| _(none)_ **[PROPOSED]** | `cdx:ai-ml:model:performance:metric:cer` | Character Error Rate — character-level analogue of WER; used for OCR and low-resource ASR. |
-| _(none)_ **[PROPOSED]** | `cdx:ai-ml:model:performance:metric:fid` | Fréchet Inception Distance — distribution-level similarity metric for generative image quality. |
-| _(none)_ **[PROPOSED]** | `cdx:ai-ml:model:performance:metric:clip-score` | Cosine similarity between CLIP embeddings of generated images and conditioning text. |
-| _(none)_ **[PROPOSED]** | `cdx:ai-ml:model:performance:metric:power-consumption` | Average power draw (watts) during a standardised inference workload. |
-| _(none)_ **[PROPOSED]** | `cdx:ai-ml:model:performance:metric:carbon-intensity` | gCO₂eq per inference request under a standardised workload and grid carbon intensity. |
+| `arc` | `cdx:ai-ml:model:performance:metric:arc` | AI2 Reasoning Challenge — multiple-choice science question benchmark measuring commonsense and factual reasoning. |
+| `hellaswag` | `cdx:ai-ml:model:performance:metric:hellaswag` | Commonsense NLI benchmark for sentence completion requiring real-world situational reasoning. |
+| `truthfulqa` | `cdx:ai-ml:model:performance:metric:truthfulqa` | Benchmark measuring a model's propensity to produce truthful answers versus plausible-sounding falsehoods. |
+| `winogrande` | `cdx:ai-ml:model:performance:metric:winogrande` | Large-scale Winograd schema challenge testing commonsense reasoning via pronoun disambiguation. |
+| `gsm8k` | `cdx:ai-ml:model:performance:metric:gsm8k` | Grade-school math benchmark measuring multi-step arithmetic reasoning. |
+| `mbpp` | `cdx:ai-ml:model:performance:metric:mbpp` | Mostly Basic Python Programming benchmark for code generation via programming problems. |
+| `bigbench-hard` | `cdx:ai-ml:model:performance:metric:bigbench-hard` | A subset of BIG-Bench tasks specifically selected for being difficult for current language models. |
+| `mmlu` | `cdx:ai-ml:model:performance:metric:mmlu` | Massive Multitask Language Understanding — the original 57-subject academic reasoning benchmark. |
+| `mme` | `cdx:ai-ml:model:performance:metric:mme` | Multimodal LLM Evaluation benchmark measuring perception and cognition across image-text pairs. |
+| `seedbench` | `cdx:ai-ml:model:performance:metric:seedbench` | SEED-Bench — multimodal benchmark with 19K multiple-choice questions covering spatial and temporal understanding. |
+| `mtbench` | `cdx:ai-ml:model:performance:metric:mtbench` | MT-Bench — multi-turn conversational benchmark graded by a strong LLM judge. |
+| `agentic-success-rate` | `cdx:ai-ml:model:performance:metric:agentic-success-rate` | Task-completion rate for autonomous agents evaluated on environment-grounded multi-step benchmarks. |
+| `ttft` | `cdx:ai-ml:model:performance:metric:ttft` | Time-to-First-Token — latency from request submission to generation of the first output token. |
+| `memory-footprint` | `cdx:ai-ml:model:performance:metric:memory-footprint` | Peak GPU/CPU memory consumption during inference. |
+| `f1` `cdx:ai-ml:model:performance:metric:f1` | Harmonic mean of precision and recall; standard metric for classification and span-extraction tasks. |
+| `exact-match` | `cdx:ai-ml:model:performance:metric:exact-match` | Strict string equality between prediction and reference; standard for extractive QA and code generation. |
+| `map` | `cdx:ai-ml:model:performance:metric:map` | Mean Average Precision — area-under-precision-recall curve averaged over classes (detection/retrieval). |
+| `ndcg` | `cdx:ai-ml:model:performance:metric:ndcg` | Normalised Discounted Cumulative Gain — ranking quality metric used in information retrieval. |
+| `wer` | `cdx:ai-ml:model:performance:metric:wer` | Word Error Rate — proportion of incorrectly predicted words; standard metric for ASR systems. |
+| `cer` | `cdx:ai-ml:model:performance:metric:cer` | Character Error Rate — character-level analogue of WER; used for OCR and low-resource ASR. |
+| `fid` | `cdx:ai-ml:model:performance:metric:fid` | Fréchet Inception Distance — distribution-level similarity metric for generative image quality. |
+| `clip-score` | `cdx:ai-ml:model:performance:metric:clip-score` | Cosine similarity between CLIP embeddings of generated images and conditioning text. |
+| `power-consumption` | `cdx:ai-ml:model:performance:metric:power-consumption` | Average power draw (watts) during a standardised inference workload. |
+| `carbon-intensity` | `cdx:ai-ml:model:performance:metric:carbon-intensity` | gCO₂eq per inference request under a standardised workload and grid carbon intensity. |
+| _(none)_ | `cdx:ai-ml:model:performance:metric:_undefined:<NAME>` | `<NAME>` placeholder, used to provide an arbitrary performance metric name. |
 
 #### Example: Referencing an extended performance metric
 
