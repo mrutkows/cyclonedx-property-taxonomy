@@ -28,7 +28,7 @@ _Boolean value_ are `true` or `false`; case sensitive.
 | `cdx:ai-ml:model:hyperparameter` | Describe parameters used to configure a model. |
 | `cdx:ai-ml:model:architecture` | Describe the structural and behavioral architecture of the model. Maps directly to the `modelArchitecture.structural` object in the JSON schema. |
 | `cdx:ai-ml:model:task` | Describe the ML task the model is designed to perform. Maps to the `modelTaskType` definition in the JSON schema. |
-| `cdx:ai-ml:model:performance` | Describe performance metrics associated with the model. Maps to the `performanceMetric.type` definition in the JSON schema. |
+| `cdx:ai-ml:model:metric` | Describe metrics, typically performance metrics, associated with the model. Utilizes the `performanceMetric.type` definition in the JSON schema. |
 
 ### `cdx:ai-ml:model:modality` Namespace Taxonomy
 
