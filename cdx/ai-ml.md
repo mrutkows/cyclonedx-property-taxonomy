@@ -535,9 +535,14 @@ Rows marked have no built-in enum equivalent and MUST use the URN-style form.
 | `seedbench` | `cdx:ai-ml:model:metric:performance:seedbench` | SEED-Bench — multimodal benchmark with 19K multiple-choice questions covering spatial and temporal understanding. |
 | `mtbench` | `cdx:ai-ml:model:metric:performance:mtbench` | MT-Bench — multi-turn conversational benchmark graded by a strong LLM judge. |
 | `agentic-success-rate` | `cdx:ai-ml:model:metric:performance:agentic-success-rate` | Task-completion rate for autonomous agents evaluated on environment-grounded multi-step benchmarks. |
+| `bfcl` | `cdx:ai-ml:model:metric:performance:bfcl` | Berkeley Function-Calling Leaderboard — tool/API function-calling accuracy across diverse schemas and languages. |
+| `browsecomp` | `cdx:ai-ml:model:metric:performance:browsecomp` | BrowseComp — hard multi-hop web research questions requiring compositional retrieval (OpenAI). |
+| `gdpval` | `cdx:ai-ml:model:metric:performance:gdpval` | GDPVal — cross-domain general performance validation benchmark. |
+| `taubench` | `cdx:ai-ml:model:metric:performance:taubench` | τ-bench (TauBench) — multi-step tool-augmented agentic task evaluation. |
+| `terminal-bench` | `cdx:ai-ml:model:metric:performance:terminal-bench` | Terminal-Bench — long-horizon autonomous shell task completion. |
 | `ttft` | `cdx:ai-ml:model:metric:performance:ttft` | Time-to-First-Token — latency from request submission to generation of the first output token. |
 | `memory-footprint` | `cdx:ai-ml:model:metric:performance:memory-footprint` | Peak GPU/CPU memory consumption during inference. |
-| `f1` `cdx:ai-ml:model:metric:performance:f1` | Harmonic mean of precision and recall; standard metric for classification and span-extraction tasks. |
+| `f1` | `cdx:ai-ml:model:metric:performance:f1` | Harmonic mean of precision and recall; standard metric for classification and span-extraction tasks. |
 | `exact-match` | `cdx:ai-ml:model:metric:performance:exact-match` | Strict string equality between prediction and reference; standard for extractive QA and code generation. |
 | `map` | `cdx:ai-ml:model:metric:performance:map` | Mean Average Precision — area-under-precision-recall curve averaged over classes (detection/retrieval). |
 | `ndcg` | `cdx:ai-ml:model:metric:performance:ndcg` | Normalised Discounted Cumulative Gain — ranking quality metric used in information retrieval. |
