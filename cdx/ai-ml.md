@@ -23,12 +23,39 @@ _Boolean value_ are `true` or `false`; case sensitive.
 | Namespace | Description |
 | --------- | ----------- |
 | `cdx:ai-ml:model:modality` | Provide the modality/modalities the model supports. This describes the specific type(s) or format(s) of data the model is designed to process such as text, images, audio, video, or sensor data. |
-| `cdx:ai-ml:model:template` | Mark a model as a template and describe its details. |
+| `cdx:ai-ml:model:template` | Mark a model's' template and describe its details. |
 | `cdx:ai-ml:model:parameter` | Describe learned parameters of a model which dictated by the model's architecture and design before training. |
 | `cdx:ai-ml:model:hyperparameter` | Describe parameters used to configure a model. |
 | `cdx:ai-ml:model:architecture` | Describe the structural and behavioral architecture of the model. Maps directly to the `modelArchitecture.structural` object in the JSON schema. |
 | `cdx:ai-ml:model:task` | Describe the ML task the model is designed to perform. Maps to the `modelTaskType` definition in the JSON schema. |
 | `cdx:ai-ml:model:metric` | Describe metrics, typically performance metrics, associated with the model. Utilizes the `performanceMetric.type` definition in the JSON schema. |
+
+### `cdx:ai-ml:model:tokenizer` Namespace Taxonomy
+
+These following values SHOULD be used with the `cdx:ai-ml:model:tokenizer` property:
+
+| Property | Description |
+| -------- | ----------- |
+| `cdx:ai-ml:model:tokenizer` | Mark a component as a (model) tokenizer. _Boolean value_. </br> This property MAY appear once. |
+
+#### Example: Marking a component as a model tokenizer
+
+```jsonc
+{
+  // ...
+  "components": [{
+    "type": "library",
+    "name": "my_tokenizer.py",
+    // ...
+    "properties": [
+      {
+        "name": "cdx:ai-ml:model:tokenizer",
+        "value": "true"
+      }
+    ]
+  }]
+}
+```
 
 ### `cdx:ai-ml:model:modality` Namespace Taxonomy
 
@@ -76,7 +103,6 @@ Model language values MUST be valid [ISO 639-1 language codes](https://en.wikipe
 
 | Property | Description |
 | -------- | ----------- |
-| `cdx:ai-ml:model:tokenizer` | Mark a component as a (model) tokenizer. _Boolean value_. </br> This property MAY appear once. |
 | `cdx:ai-ml:model:language` | Describe what language(s) a model was trained for. Value MUST be of [ISO 639-1 language codes](https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes). Value MUST be a single language code (e.g. `nl`) or a comma separated list of language codes (e.g. `en,fr,de,it,ja,zh`). </br> This property MAY occur multiple times. |
 
 ### Example: Using multiple languages
