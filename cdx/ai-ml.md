@@ -151,7 +151,12 @@ Model properties reflect on the methods used to control the model's parameter co
 | -------- | ----------- |
 | `cdx:ai-ml:model:parameter:count` | Total number of learned parameters for the model. This reflects the model's design and structure (e.g., number of layers in a neural network, nodes, and connectivity). </br> The value SHOULD use the industry-standard naming convention of number followed by one of the letters: `M` (Million), `B` (Billion) or `T` (Trillion). May appear once. |
 | `cdx:ai-ml:model:parameter:tune_method` | Describes how the model was fine-tuned on or adapted to new data. This property MAY appear multiple times. Value SHOULD be of industry-standard keywords such as those [listed in the section below](#names-of-industry-standard-fine-tuning-methods). Value MUST be a single keyword (e.g., `lora`) or a comma separated list of keywords (e.g., `sft,rlhf`). </br> This property MAY occur multiple times. |
-| `cdx:ai-ml:model:parameter:_undefined:<NAME>` | `<NAME>` placeholder, used to provide an arbitrary model parameter name. Arbitrarty value and meaning. |
+| `cdx:ai-ml:model:parameter:quantization:scheme` | Identifies the quantization scheme applied to the model. Value SHOULD be one of the [quantization scheme values listed below](#quantization-scheme-values). MUST be set before any other `quantization` sub-properties are used. MAY appear once. |
+| `cdx:ai-ml:model:parameter:quantization:scale` | The scale factor(s) used by the quantization scheme. For per-tensor quantization, value is a single decimal number (e.g., `0.0078125`). For per-axis quantization, value is a JSON numeric array with elements ordered by axis index (e.g., `[0.0078125, 0.015625]`). MAY appear once. |
+| `cdx:ai-ml:model:parameter:quantization:zeroPoint` | The zero-point offset(s) used by the quantization scheme. For per-tensor quantization, value is a single integer (e.g., `128`). For per-axis quantization, value is a JSON integer array ordered by axis index (e.g., `[128, 0]`), with cardinality matching `quantization:scale`. MAY appear once. |
+| `cdx:ai-ml:model:parameter:quantization:granularity` | The granularity at which quantization parameters are applied. Value MUST be one of: `per-tensor` (a single scale and zero-point applies to the entire tensor) or `per-axis` (separate scale and zero-point values apply along a specific axis). Defaults to `per-tensor` when absent. MAY appear once. |
+| `cdx:ai-ml:model:parameter:quantization:axis` | The axis index along which per-axis quantization is applied. Required when `quantization:granularity` is `per-axis`; MUST be omitted or ignored when granularity is `per-tensor`. Value is a non-negative integer that identifies the quantized dimension in the tensor shape. MAY appear once. |
+| `cdx:ai-ml:model:parameter:_undefined:<NAME>` | `<NAME>` placeholder, used to provide an arbitrary model parameter name. Arbitrary value and meaning. |
 
 #### Names of industry-standard fine-tuning methods
 
@@ -167,6 +172,16 @@ These following and similar values SHOULD be used on the `cdx:ai-ml:model:parame
 | `lora` | Low-Rank Adaptation (LoRA). A standard Parameter-Efficient Fine-Tuning (PEFT) method. |
 | `alora` | Allocating Low-Rank Adaptation (ALoRA). A standard Parameter-Efficient Fine-Tuning (PEFT) method. |
 | `qlora` | Quantized low-rank adaptation (QLoRA). A standard Parameter-Efficient Fine-Tuning (PEFT) method. |
+
+#### Quantization scheme values
+
+The `cdx:ai-ml:model:parameter:quantization:scheme` property identifies the mathematical contract between floating-point values and their quantized integer representation. A scheme determines which companion sub-properties (`scale`, `zeroPoint`, `granularity`, `axis`) are meaningful. Future schemes MAY introduce additional sub-properties under the same `cdx:ai-ml:model:parameter:quantization:` namespace without conflicting with existing entries.
+
+| Value | Description |
+| ----- | ----------- |
+| `affine_asymmetric` | Affine (uniform) asymmetric quantization. Maps the floating-point range to an integer range via a scale and a non-zero zero-point: `x_float = scale × (x_int − zeroPoint)`. The companion `scale` and `zeroPoint` sub-properties MUST be present. |
+| `affine_symmetric` | Affine (uniform) symmetric quantization. A specialization of affine quantization where the zero-point is fixed at zero, halving the integer range to keep the zero crossing exact. The companion `scale` sub-property MUST be present; `zeroPoint` SHOULD be omitted or set to `0`. |
+| `_undefined:<NAME>` | `<NAME>` placeholder, used to identify a quantization scheme not yet listed in this taxonomy. |
 
 #### Example: Using model parameter names listed in the AI/ML taxonomy
 
@@ -222,6 +237,80 @@ The following pseudocode shows how you would include a model parameter that is n
           {
             "name": "cdx:ai-ml:model:parameter:_undefined:foo",
             "value": "bar"
+          }
+        ]
+      }
+    }
+  }]
+}
+```
+
+#### Example: Using quantization parameters (per-tensor, affine asymmetric)
+
+The following pseudocode shows how to describe a TFLite-style INT8 affine asymmetric per-tensor quantization on a model's model card:
+
+```jsonc
+{
+  // ...
+  "components": [{
+    "type": "machine-learning-model",
+    "name": "my quantized model",
+    "modelCard": {
+      // ...
+      "modelParameters": {
+        "properties": [
+          {
+            "name": "cdx:ai-ml:model:parameter:quantization:scheme",
+            "value": "affine_asymmetric"
+          },
+          {
+            "name": "cdx:ai-ml:model:parameter:quantization:granularity",
+            "value": "per-tensor"
+          },
+          {
+            "name": "cdx:ai-ml:model:parameter:quantization:scale",
+            "value": "0.0078125"
+          },
+          {
+            "name": "cdx:ai-ml:model:parameter:quantization:zeroPoint",
+            "value": "128"
+          }
+        ]
+      }
+    }
+  }]
+}
+```
+
+#### Example: Using quantization parameters (per-axis, affine symmetric)
+
+The following pseudocode shows how to describe a PyTorch-style per-axis INT8 affine symmetric quantization of a weight tensor along axis `0`. Because zero-point is fixed at zero by the symmetric contract, `zeroPoint` is omitted entirely. `scale` is still a JSON numeric array with one element per slice along the quantized axis.
+
+```jsonc
+{
+  // ...
+  "components": [{
+    "type": "machine-learning-model",
+    "name": "my symmetric per-axis quantized model",
+    "modelCard": {
+      // ...
+      "modelParameters": {
+        "properties": [
+          {
+            "name": "cdx:ai-ml:model:parameter:quantization:scheme",
+            "value": "affine_symmetric"
+          },
+          {
+            "name": "cdx:ai-ml:model:parameter:quantization:granularity",
+            "value": "per-axis"
+          },
+          {
+            "name": "cdx:ai-ml:model:parameter:quantization:axis",
+            "value": "0"
+          },
+          {
+            "name": "cdx:ai-ml:model:parameter:quantization:scale",
+            "value": "[0.00787402, 0.01574803, 0.00393701]"
           }
         ]
       }
