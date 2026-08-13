@@ -247,7 +247,7 @@ The following pseudocode shows how you would include a model parameter that is n
 
 #### Example: Using quantization parameters (per-tensor, affine asymmetric)
 
-The following pseudocode shows how to describe a TFLite-style INT8 affine asymmetric per-tensor quantization on a model's model card:
+The following pseudocode shows how to describe per-tensor affine asymmetric quantization parameters in a model card:
 
 ```jsonc
 {
