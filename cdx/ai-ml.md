@@ -284,7 +284,7 @@ The following pseudocode shows how to describe a TFLite-style INT8 affine asymme
 
 #### Example: Using quantization parameters (per-axis, affine symmetric)
 
-The following pseudocode shows how to describe a PyTorch-style per-axis INT8 affine symmetric quantization of a weight tensor along axis `0`. Because zero-point is fixed at zero by the symmetric contract, `zeroPoint` is omitted entirely. `scale` is still a JSON numeric array with one element per slice along the quantized axis.
+The following pseudocode shows how to describe a PyTorch-style per-axis INT8 affine symmetric quantization of a weight tensor along axis `0`. In this signed INT8 example, the symmetric convention uses `zeroPoint = 0`, which the example omits. The `scale` property value is a string containing a JSON-serialized numeric array with one element per slice along the quantized axis.
 
 ```jsonc
 {
