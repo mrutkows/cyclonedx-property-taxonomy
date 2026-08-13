@@ -180,7 +180,7 @@ The `cdx:ai-ml:model:parameter:quantization:scheme` property identifies the math
 | Value | Description |
 | ----- | ----------- |
 | `affine_asymmetric` | Affine (uniform) asymmetric quantization. Maps the floating-point range to an integer range via a scale and zero-point: `x_float = scale * (x_int - zeroPoint)`. The zero-point is not constrained by a symmetry requirement and may therefore be zero. The companion `scale` and `zeroPoint` sub-properties MUST be present. |
-| `affine_symmetric` | Affine (uniform) symmetric quantization. A specialization of affine quantization where the zero-point is fixed at zero, halving the integer range to keep the zero crossing exact. The companion `scale` sub-property MUST be present; `zeroPoint` SHOULD be omitted or set to `0`. |
+| `affine_symmetric` | Affine (uniform) symmetric quantization. A specialization of affine quantization that applies a symmetry constraint around real zero. The companion `scale` sub-property MUST be present. The zero-point convention depends on the declared integer representation; for zero-centered signed INT8 storage, `zeroPoint` is `0`. |
 | `_undefined:<NAME>` | `<NAME>` placeholder, used to identify a quantization scheme not yet listed in this taxonomy. |
 
 #### Example: Using model parameter names listed in the AI/ML taxonomy
