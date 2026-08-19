@@ -12,6 +12,7 @@ The following are the reserved namespaces for AI/ML under the `cdx:ai-ml` namesp
 | --------- | ----------- |
 | `cdx:ai-ml:model` | Model-related properties. |
 | `cdx:ai-ml:tokenizer` | Tokenizer-related properties. |
+| `cdx:ai-ml:dataset` | Dataset-related properties. |
 | `cdx:ai-ml:prompt` | Prompt-related properties. |
 
 _Boolean value_ are `true` or `false`; case sensitive.
@@ -781,6 +782,193 @@ In the same way as shown in the model's `hyperparameter` example, the following 
       {
         "name": "cdx:ai-ml:tokenizer:hyperparameter:_undefined:baz",
         "value": "qux"
+      }
+    ]
+  }]
+}
+```
+
+---
+
+## `cdx:ai-ml:dataset` Namespace Taxonomy
+
+The `cdx:ai-ml:dataset` namespace provides standardised properties for describing training and evaluation datasets referenced in an AI/ML BOM. These properties are designed to be placed on `data` components (or any component representing a dataset) within the `components` array.
+
+The following are the reserved property names in the `cdx:ai-ml:dataset` namespace:
+
+| Property | Description |
+| -------- | ----------- |
+| `cdx:ai-ml:dataset:stage` | The training pipeline stage in which this dataset was used. Value SHOULD be one of the [stage values listed below](#cdxai-mldatasetstage-values). This property MAY appear multiple times when the same dataset is used across more than one stage. Per-stage usage detail (e.g. subset, sampling configuration) SHOULD be described in a CycloneDX formula. |
+| `cdx:ai-ml:dataset:category` | The content category or domain of the dataset. Value SHOULD be one of the [category values listed below](#cdxai-mldatasetcategory-values). This property MAY appear multiple times. |
+| `cdx:ai-ml:dataset:date_obtained` | The date on which the dataset was obtained or ingested. Value MUST be a valid [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date string (e.g. `2024-03-15`). This property MAY appear once. |
+| `cdx:ai-ml:dataset:size` | The storage size of the dataset as a human-readable string with a unit suffix (e.g. `420 GB`, `1.2 TB`). This property MAY appear once. |
+| `cdx:ai-ml:dataset:languages` | The natural language(s) present in the dataset. Value MUST be a single [BCP-47](https://www.rfc-editor.org/rfc/rfc5646) language tag (e.g. `en`) or a comma-separated list of BCP-47 tags (e.g. `en,ja,de,fr`). The sentinel value `multilingual` MAY be used when the dataset spans a large number of languages and enumeration is impractical. This property MAY appear once. |
+| `cdx:ai-ml:dataset:data:sources` | The EU AI Act data source category or categories that describe how the dataset was obtained. Value SHOULD be one of the [data sources values listed below](#cdxai-mldatasetdatasources-values). This property MAY appear multiple times when the dataset spans more than one source category. |
+| `cdx:ai-ml:dataset:seed_data` | Indicates whether this dataset was used as seed data for generating a synthetic or derived dataset. _Boolean value_. This property MAY appear once. |
+| `cdx:ai-ml:dataset:_undefined:<NAME>` | `<NAME>` placeholder, used to provide an arbitrary dataset property name. Arbitrary value and meaning. |
+
+---
+
+### `cdx:ai-ml:dataset:stage` Values
+
+A dataset component MAY carry more than one `cdx:ai-ml:dataset:stage` property when it participates in multiple pipeline stages. When the specific configuration, subset, or sampling ratio differs between stages, those details SHOULD be captured in the CycloneDX `formulation` field as discrete training tasks referencing this component by its `bom-ref`.
+
+| Value | Description |
+| ----- | ----------- |
+| `pre-training` | Dataset used during the initial large-scale pre-training stage. |
+| `post-training` | Dataset used during any stage after pre-training, including supervised fine-tuning, Reinforcement Learning from Human Feedback (RLHF), alignment, or instruction tuning. |
+| `fine-tuning` | Dataset used during a task-specific or domain-specific fine-tuning stage. |
+| `evaluation` | Dataset used exclusively for model evaluation or benchmarking; not used during training. |
+| `_undefined:<NAME>` | `<NAME>` placeholder, used to provide an arbitrary training stage name. |
+
+---
+
+### `cdx:ai-ml:dataset:category` Values
+
+| Value | Description |
+| ----- | ----------- |
+| `code` | Source code, programming examples, or software-related text. |
+| `web` | Content sourced from web crawls or scraped web pages. |
+| `math` | Mathematical texts, proofs, problems, and solutions. |
+| `multilingual` | Content spanning multiple natural languages without a single dominant language. |
+| `domain` | Specialised domain knowledge (e.g., scientific literature, legal text, medical records). |
+| `instructions` | Instruction-following examples, prompt–response pairs, or chat conversation data. |
+| `technical` | Technical documentation, manuals, or structured reference material. |
+| `books` | Long-form prose from books, novels, or other published works. |
+| `academic` | Academic papers, preprints, or scholarly publications. |
+| `news` | News articles or journalistic content. |
+| `_undefined:<NAME>` | `<NAME>` placeholder, used to provide an arbitrary dataset category name. |
+
+---
+
+### `cdx:ai-ml:dataset:data:sources` Values
+
+Corresponds to the data source categories defined in Section 2 ("Lists of data sources") of the EU AI Act Annex XI template (Article 53 of the EU AI Act). The `cdx:ai-ml:dataset:data:sources` property answers the question: *how or where was this data originally collected?* A dataset component MAY carry more than one `cdx:ai-ml:dataset:data:sources` property when the dataset is assembled from multiple source categories.
+
+| Value | Description |
+| ----- | ----------- |
+| `publicly-available` | Dataset obtained from a publicly accessible repository, open release, or other public source. |
+| `third-party-private` | Dataset obtained from a third party that is not publicly accessible. |
+| `web-crawl` | Data collected via automated crawling or scraping of publicly accessible web content. |
+| `user-data` | Data originating from real human user interactions or direct user capture (e.g., feedback, conversations, user-generated content). |
+| `synthetic` | Data that was synthetically generated and is not derived directly from real-world observations. |
+| `other` | Data sourced through means not covered by the categories above. |
+| `_undefined:<NAME>` | `<NAME>` placeholder, used to provide an arbitrary source designation. |
+
+---
+
+### Example: Annotating a pre-training dataset component
+
+The following pseudocode shows how the `cdx:ai-ml:dataset` properties would be applied to a dataset component in the `components` array of a CycloneDX BOM.
+
+```jsonc
+{
+  // ...
+  "components": [{
+    "type": "data",
+    "bom-ref": "dataset--GneissWeb",
+    "name": "GneissWeb",
+    "description": "Large-scale English web text corpus curated from Common Crawl with quality filtering.",
+    "externalReferences": [{
+      "type": "distribution",
+      "url": "https://huggingface.co/datasets/ibm-granite/GneissWeb"
+    }],
+    "properties": [
+      {
+        "name": "cdx:ai-ml:dataset:stage",
+        "value": "pre-training"
+      },
+      {
+        "name": "cdx:ai-ml:dataset:category",
+        "value": "web"
+      },
+      {
+        "name": "cdx:ai-ml:dataset:languages",
+        "value": "en"
+      },
+      {
+        "name": "cdx:ai-ml:dataset:size",
+        "value": "9.6 TB"
+      },
+      {
+        "name": "cdx:ai-ml:dataset:date_obtained",
+        "value": "2024-06-01"
+      },
+      {
+        "name": "cdx:ai-ml:dataset:data:sources",
+        "value": "publicly-available"
+      },
+      {
+        "name": "cdx:ai-ml:dataset:data:sources",
+        "value": "web-crawl"
+      },
+      {
+        "name": "cdx:ai-ml:dataset:seed_data",
+        "value": "false"
+      }
+    ]
+  }]
+}
+```
+
+### Example: Annotating a synthetic post-training dataset
+
+```jsonc
+{
+  // ...
+  "components": [{
+    "type": "data",
+    "bom-ref": "dataset--NuminaMath-CoT",
+    "name": "NuminaMath-CoT",
+    "description": "Chain-of-thought math reasoning dataset synthetically generated from seed problems.",
+    "externalReferences": [{
+      "type": "distribution",
+      "url": "https://huggingface.co/datasets/AI-MO/NuminaMath-CoT"
+    }],
+    "properties": [
+      {
+        "name": "cdx:ai-ml:dataset:stage",
+        "value": "post-training"
+      },
+      {
+        "name": "cdx:ai-ml:dataset:category",
+        "value": "math"
+      },
+      {
+        "name": "cdx:ai-ml:dataset:languages",
+        "value": "en"
+      },
+      {
+        "name": "cdx:ai-ml:dataset:data:sources",
+        "value": "publicly-available"
+      },
+      {
+        "name": "cdx:ai-ml:dataset:data:sources",
+        "value": "synthetic"
+      },
+      {
+        "name": "cdx:ai-ml:dataset:seed_data",
+        "value": "false"
+      }
+    ]
+  }]
+}
+```
+
+### Example: Using an unlisted dataset property name
+
+The following pseudocode shows how to include a dataset property that is not currently listed in the `cdx:ai-ml:dataset` namespace taxonomy. Below, we introduce the metasyntactic property name `foo` with a value `bar`.
+
+```jsonc
+{
+  // ...
+  "components": [{
+    "type": "data",
+    "name": "my-dataset",
+    "properties": [
+      {
+        "name": "cdx:ai-ml:dataset:_undefined:foo",
+        "value": "bar"
       }
     ]
   }]
